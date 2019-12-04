@@ -21,7 +21,7 @@ public class Snake {
     public Snake() {
         size = 3;
 
-        xPos = (int) (Math.random() * (GameLauncher.size-4)+1);
+        xPos = (GameLauncher.size-3);
         yPos = (int) (Math.random() * (GameLauncher.size));
 
         x.add(xPos);
@@ -506,30 +506,85 @@ public class Snake {
         }
     }
 
+    public void display(){
+        StdDraw.setPenColor(Color.BLACK);
+        StdDraw.filledSquare(GameLauncher.size/2.0-0.5,GameLauncher.size/2.0-0.5,GameLauncher.size/2.0+1);
+        StdDraw.setPenColor(Color.WHITE);
+        StdDraw.filledSquare(GameLauncher.size/2.0-0.5,GameLauncher.size/2.0-0.5,GameLauncher.size/2.0);
+
+        int i, xp, xx, xn, yp, yy, yn;
+        for(i = 1; i < size-1; i ++){
+
+            // body
+            StdDraw.setPenColor(new Color(i*200/size,255,i*200/size));
+            xp=x.get(i-1);
+            xx=x.get(i);
+            xn=x.get(i+1);
+            yp=y.get(i-1);
+            yy=y.get(i);
+            yn=y.get(i+1);
+            if (xp + 1 == xx && yy + 1 == yn || xn + 1 == xx && yy + 1 == yp){
+                StdDraw.filledPolygon(  new double[]{xx, xx+0.45, xx+0.45, xx-0.45, xx-0.45, xx     },
+                                        new double[]{yy, yy     , yy+0.45, yy+0.45, yy-0.45, yy-0.45});
+                StdDraw.filledCircle(xx,yy,0.45);
+            }else if (xp - 1 == xx && yy + 1 == yn || xn - 1 == xx && yy + 1 == yp){
+                StdDraw.filledPolygon(  new double[]{xx, xx-0.45, xx-0.45, xx+0.45, xx+0.45, xx     },
+                                        new double[]{yy, yy     , yy+0.45, yy+0.45, yy-0.45, yy-0.45});
+                StdDraw.filledCircle(xx,yy,0.45);
+            }else if (xp + 1 == xx && yy - 1 == yn || xn + 1 == xx && yy - 1 == yp){
+                StdDraw.filledPolygon(  new double[]{xx, xx     , xx-0.45, xx-0.45, xx+0.45, xx+0.45},
+                                        new double[]{yy, yy+0.45, yy+0.45, yy-0.45, yy-0.45, yy     });
+                StdDraw.filledCircle(xx,yy,0.45);
+            }else if (xp - 1 == xx && yy - 1 == yn || xn - 1 == xx && yy - 1 == yp){
+                StdDraw.filledPolygon(  new double[]{xx, xx-0.45, xx-0.45, xx+0.45, xx+0.45, xx     },
+                                        new double[]{yy, yy     , yy-0.45, yy-0.45, yy+0.45, yy+0.45});
+                StdDraw.filledCircle(xx,yy,0.45);
+            }else{
+                StdDraw.filledSquare(x.get(i),y.get(i),0.45);
+            }
+            // body line
+            StdDraw.setPenColor(new Color(100,i*220/size,255-i*100/size));
+            StdDraw.line(x.get(i-1),y.get(i-1),x.get(i),y.get(i));
+        }
+
+        xp=x.get(i-1);
+        xx=x.get(i);
+        yp=y.get(i-1);
+        yy=y.get(i);
+
+        // tail line
+        StdDraw.setPenColor(new Color(100,i*220/size,255-i*100/size));
+        StdDraw.line(x.get(i-1),y.get(i-1),x.get(i),y.get(i));
+        // tail
+        if (xp + 1 == xx) {
+            StdDraw.filledPolygon(   new double[]{xx-0.45, xx-0.45, xx+0.40, xx+0.40},
+                                     new double[]{yy-0.40, yy+0.40, yy+0.25, yy-0.25});
+        }else if (xp - 1 == xx) {
+            StdDraw.filledPolygon(   new double[]{xx+0.45, xx+0.45, xx-0.40, xx-0.40},
+                                     new double[]{yy-0.40, yy+0.40, yy+0.25, yy-0.25});
+        }else if (yp + 1 == yy){
+            StdDraw.filledPolygon(   new double[]{xx-0.40, xx+0.40, xx+0.25, xx-0.25},
+                                     new double[]{yy-0.45, yy-0.45, yy+0.40, yy+0.40});
+        }else if (yp - 1 == yy){
+            StdDraw.filledPolygon(   new double[]{xx-0.40, xx+0.40, xx+0.25, xx-0.25},
+                                     new double[]{yy+0.45, yy+0.45, yy-0.40, yy-0.40});
+        }
+
+        // head
+        StdDraw.setPenColor(Color.BLUE);
+             if (dx == 1) StdDraw.filledPolygon(    new double[]{xPos-0.45, xPos-0.45, xPos+0.45, xPos+0.45},
+                                                    new double[]{yPos-0.45, yPos+0.45, yPos+0.30, yPos-0.30});
+        else if (dx == -1) StdDraw.filledPolygon(   new double[]{xPos+0.45, xPos+0.45, xPos-0.45, xPos-0.45},
+                                                    new double[]{yPos-0.45, yPos+0.45, yPos+0.30, yPos-0.30});
+        else if (dy == 1) StdDraw.filledPolygon(    new double[]{xPos-0.45, xPos+0.45, xPos+0.30, xPos-0.30},
+                                                    new double[]{yPos-0.45, yPos-0.45, yPos+0.45, yPos+0.45});
+        else if (dy == -1) StdDraw.filledPolygon(   new double[]{xPos-0.45, xPos+0.45, xPos+0.30, xPos-0.30},
+                                                    new double[]{yPos+0.45, yPos+0.45, yPos-0.45, yPos-0.45});
+    }
+
     public void update(Food f, boolean display){
         move(f);
-
-        if (display){
-            StdDraw.setPenColor(Color.BLACK);
-            StdDraw.filledSquare(GameLauncher.size/2.0-0.5,GameLauncher.size/2.0-0.5,GameLauncher.size/2.0+1);
-            StdDraw.setPenColor(Color.WHITE);
-            StdDraw.filledSquare(GameLauncher.size/2.0-0.5,GameLauncher.size/2.0-0.5,GameLauncher.size/2.0);
-
-
-            for(int i = 1; i < size; i ++){
-                StdDraw.setPenColor(new Color(i*200/size,255,i*200/size));
-                StdDraw.filledSquare(x.get(i),y.get(i),0.45);
-                StdDraw.setPenColor(new Color(0,180,255));
-                StdDraw.line(x.get(i-1),y.get(i-1),x.get(i),y.get(i));
-            }
-
-            StdDraw.setPenColor(Color.MAGENTA);
-            StdDraw.filledCircle(x.get(size-1),y.get(size-1),0.25);
-
-            StdDraw.setPenColor(Color.BLUE);
-            StdDraw.filledSquare(xPos,yPos,0.45);
-
-        }
+        if (display) display();
     }
 
     public boolean covered(int xx, int yy){

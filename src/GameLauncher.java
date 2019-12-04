@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class GameLauncher {
-    public static boolean up = false, dn = false, lt = false, rt = false, sp = false, at = false;
+    public static boolean up = false, dn = false, lt = false, rt = false, sp = false, spp = false, at = false, atp = false, auto = false, bst = false;
     public static int size;
 
     public static void main(String args[]) {
@@ -14,6 +14,7 @@ public class GameLauncher {
 
         Text t = new Text();
 
+        StdDraw.setFont(new Font("Arial", Font.BOLD, 20));
         StdDraw.setScale(0, size-1);
         StdDraw.setPenRadius(0.3/size);
 
@@ -43,7 +44,7 @@ public class GameLauncher {
                     sp = sp || StdDraw.isKeyPressed(KeyEvent.VK_SPACE);
                     at = at || StdDraw.isKeyPressed(KeyEvent.VK_A);
 
-                    StdDraw.show(sp ? (at ? 0 : 3) : ((at ? 5 : 15)));
+                    StdDraw.show(bst ? (auto ? 0 : 3) : ((auto ? 5 : 15)));
 
                     up = up || StdDraw.isKeyPressed(KeyEvent.VK_UP);
                     dn = dn || StdDraw.isKeyPressed(KeyEvent.VK_DOWN);
@@ -51,7 +52,18 @@ public class GameLauncher {
                     rt = rt || StdDraw.isKeyPressed(KeyEvent.VK_RIGHT);
                 }
 
-                if (at){
+                if (!atp && at) auto=!auto;
+
+                if (auto){
+                    if (!spp && sp) bst=!bst;
+                }else{
+                    bst = sp;
+                }
+
+                atp = at;
+                spp = sp;
+
+                if (auto){
                     s.autoPlay(f, t,true);
                 }else{
                     s.turn(up, dn, lt, rt);
@@ -65,7 +77,7 @@ public class GameLauncher {
 
                 s.update(f,true);
                 f.update(s);
-                t.update(at,s.size);
+                t.update(auto,s.size);
 
                 StdDraw.show();
             }

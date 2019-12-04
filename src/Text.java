@@ -5,9 +5,9 @@ public class Text {
 
     public void start(){
         StdDraw.setPenColor(Color.BLACK);
-        StdDraw.text(((double)GameLauncher.size)/2-0.5, 2, "Press Up, Down, Left, Right to Move Snake");
-        StdDraw.text(((double)GameLauncher.size)/2-0.5, 1, "Press Space to Boost in Game");
-        StdDraw.text(((double)GameLauncher.size)/2-0.5, 0, "Press S to Play, Press A to Auto Play");
+        StdDraw.text(GameLauncher.size/2.0-0.5, GameLauncher.size/5.0, "Press Up, Down, Left, Right to Move Snake");
+        StdDraw.text(GameLauncher.size/2.0-0.5, GameLauncher.size/10.0, "Press Space to Boost in Game");
+        StdDraw.text(GameLauncher.size/2.0-0.5, 0, "Press S to Play, Press A to Auto Play");
     }
 
     public void update(boolean auto, int score){
@@ -15,18 +15,18 @@ public class Text {
         if (auto){
             StdDraw.textLeft(0,0,"AutoPlay" + (greedy ? " - Greedy" : ""));
         }
-        StdDraw.textLeft(0,(double)GameLauncher.size-1, Integer.toString(score));
+        StdDraw.textLeft(0,GameLauncher.size-1, Integer.toString(score));
     }
 
     public void win(){
         StdDraw.setPenColor(Color.RED);
-        StdDraw.text(((double)GameLauncher.size)/2-0.5, (double)GameLauncher.size-1, "YOU DESTROY THE GAME!!!");
+        StdDraw.text(GameLauncher.size/2.0-0.5, GameLauncher.size/1.5, "YOU ACTUALLY DESTROY THE GAME!!!");
         StdDraw.show();
     }
 
     public void dead(){
         StdDraw.setPenColor(Color.RED);
-        StdDraw.text(((double)GameLauncher.size)/2-0.5, (double)GameLauncher.size-1, "YOU ARE DESTROYED BY THE GAME!!!");
+        StdDraw.text(GameLauncher.size/2.0-0.5, GameLauncher.size/1.5, "YOU ARE DESTROYED BY THE GAME!!!");
         StdDraw.show();
     }
 }
