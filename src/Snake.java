@@ -16,8 +16,6 @@ public class Snake {
     public Queue<Integer> dxs = new LinkedList<Integer>();
     public Queue<Integer> dys = new LinkedList<Integer>();
 
-    public boolean tR = false, tL = false;
-
     public Snake() {
         size = 3;
 
@@ -69,11 +67,9 @@ public class Snake {
 
                 v = new Snake(u);
                 v.update(f,false);
-                if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                     v.dxs.add(v.dx);
                     v.dys.add(v.dy);
-                    v.tL = false;
-                    v.tR = false;
                     q.add(v);
                     if (v.xPos == f.xPos && v.yPos == f.yPos){
                         finished = true;
@@ -84,11 +80,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, false, true);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = false;
-                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -99,11 +93,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, true, false);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = true;
-                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -114,11 +106,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, true, false);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = false;
-                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -129,11 +119,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, false, true);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = true;
-                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -144,11 +132,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, true, false, false);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = false;
-                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -159,11 +145,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(true, false, false, false);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = true;
-                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -174,11 +158,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(true, false, false, false);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = false;
-                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -189,11 +171,9 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, true, false, false);
                     v.update(f,false);
-                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
-                        v.tL = true;
-                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -204,22 +184,10 @@ public class Snake {
             }
             if (!finished){
                 t.greedy = true;
-//                this.avoidTail();
-//                this.autoTurnGreedy(dy == 1, dy == -1, dx == -1, dx == 1, true);
                 this.autoTurnGreedy(this.y.get(size-1)<this.yPos, this.y.get(size-1)>this.yPos, this.x.get(size-1)>this.xPos, this.x.get(size-1)<this.xPos, f,true);
             }else{
-                if (v.survive(f)){
-                    dxs.addAll(v.dxs);
-                    dys.addAll(v.dys);
-                }else{
-                    finished = false;
-                    t.greedy = true;
-//                    this.autoTurnGreedy(dy == 1, dy == -1, dx == -1, dx == 1, true);
-                    this.autoTurnGreedy(this.y.get(size-1)<this.yPos, this.y.get(size-1)>this.yPos, this.x.get(size-1)>this.xPos, this.x.get(size-1)<this.xPos, f, true      );
-
-//                    this.avoidTail();
-//                    System.out.println("Trapped after Food! Avoiding tail: " + (size-3));
-                }
+                dxs.addAll(v.dxs);
+                dys.addAll(v.dys);
             }
         }
         if (finished){
@@ -248,10 +216,10 @@ public class Snake {
         sL.move(f);
         sR.move(f);
 
-        boolean mU = !coveredNoTail(xPos,yPos+1) && !edged(xPos, yPos+1) && (!survival || sU.survive(f)),
-                mD = !coveredNoTail(xPos,yPos-1) && !edged(xPos, yPos-1) && (!survival || sD.survive(f)),
-                mL = !coveredNoTail(xPos-1,yPos) && !edged(xPos-1, yPos) && (!survival || sL.survive(f)),
-                mR = !coveredNoTail(xPos+1,yPos) && !edged(xPos+1, yPos) && (!survival || sR.survive(f));
+        boolean mU = dy!=-1 && (!survival || sU.survive(f)),
+                mD = dy!= 1 && (!survival || sD.survive(f)),
+                mL = dx!= 1 && (!survival || sL.survive(f)),
+                mR = dx!=-1 && (!survival || sR.survive(f));
 
 //        if (survival) System.out.println(mU + " " + mD + " " + mL + " " + mR);
 
@@ -432,7 +400,7 @@ public class Snake {
             autoTurnBFS(f,t);
         }else{
             t.greedy = true;
-            autoTurnGreedy(yPos<f.yPos,yPos>f.yPos,xPos>f.xPos,xPos<f.xPos, f, false);
+            autoTurnGreedy(yPos<f.yPos,yPos>f.yPos,xPos>f.xPos,xPos<f.xPos, f, true);
         }
     }
 
@@ -573,12 +541,15 @@ public class Snake {
     }
 
     public boolean survive(Food f){
+        if (this.dead()) return false;
+
         Snake t = new Snake(this);
         HashSet<Integer> hs = new HashSet<Integer>();
         hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
 
         for (int i=0; i<size-1; i++){
 //            t.autoTurnGreedy(dy == 1, dy == -1, dx == -1,dx == 1, false);
+//            t.autoTurnGreedy(t.y.get(size-1)<t.yPos, t.y.get(size-1)>t.yPos, t.x.get(size-1)>t.xPos,t.x.get(size-1)<t.xPos, f,false);
             t.autoTurnGreedy(t.y.get(size-1)>t.yPos, t.y.get(size-1)<t.yPos, t.x.get(size-1)<t.xPos,t.x.get(size-1)>t.xPos, f,false);
             t.move(f);
             hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
