@@ -70,19 +70,18 @@ public class GameLauncher {
                     s.finished = false;
                 }
 
-
-                if (s.size == size*size - 1) break;
-
                 StdDraw.clear();
 
                 s.update(f,true);
-                f.update(s);
                 t.update(auto,s.size);
+                if (s.size == size*size) break;
+
+                f.update(s);
 
                 StdDraw.show();
             }
 
-            if (s.size == size*size - 1){
+            if (s.size == size*size){
                 t.win();
             }else{
                 t.dead();
