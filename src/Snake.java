@@ -571,7 +571,7 @@ public class Snake {
         }
 
         // head
-        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.setPenColor(new Color(100,0,2550));
              if (dx == 1) StdDraw.filledPolygon(    new double[]{xPos-0.45, xPos-0.45, xPos+0.45, xPos+0.45},
                                                     new double[]{yPos-0.45, yPos+0.45, yPos+0.30, yPos-0.30});
         else if (dx == -1) StdDraw.filledPolygon(   new double[]{xPos+0.45, xPos+0.45, xPos-0.45, xPos-0.45},
