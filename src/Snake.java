@@ -231,56 +231,6 @@ public class Snake {
         }
     }
 
-    public boolean survive(Food f){
-        Snake t = new Snake(this);
-        for (int i=0; i<size-1; i++){
-//            t.autoTurnGreedy(dy == 1, dy == -1, dx == -1,dx == 1, false);
-            t.autoTurnGreedy(t.y.get(size-1)>t.yPos, t.y.get(size-1)<t.yPos, t.x.get(size-1)<t.xPos,t.x.get(size-1)>t.xPos, f,false);
-            t.move(f);
-            if (t.dead()) return false;
-        }
-        return true;
-    }
-
-    public void turnU(){
-        dx = 0;
-        dy = 1;
-    }
-
-    public void turnD(){
-        dx = 0;
-        dy = -1;
-    }
-
-    public void turnL(){
-        dx = -1;
-        dy = 0;
-    }
-
-    public void turnR() {
-        dx = 1;
-        dy = 0;
-    }
-
-    public void turn(boolean up, boolean dn, boolean lt, boolean rt){
-        if (up && dy == 0){
-            dx = 0;
-            dy = 1;
-        }
-        else if (dn && dy == 0){
-            dx = 0;
-            dy = -1;
-        }
-        else if (lt && dx == 0){
-            dx = -1;
-            dy = 0;
-        }
-        else if (rt && dx == 0){
-            dx = 1;
-            dy = 0;
-        }
-    }
-
     public void autoTurnGreedy(boolean up, boolean dn, boolean lt, boolean rt, Food f,boolean survival){
 
         Snake sU = new Snake(this);
@@ -424,8 +374,8 @@ public class Snake {
                     turnL();
                 }else if (mU){
                     turnU();
-                }else if (mL)
-                    turnL();
+                }else if (mR)
+                    turnR();
             }else if (dn){
                 if (rt && mR){
                     turnR();;
@@ -486,9 +436,44 @@ public class Snake {
         }
     }
 
-    public boolean dead(){
-        if (coveredNoHead(xPos,yPos) || edged(xPos,yPos)) return true;
-        return false;
+    public void turnU(){
+        dx = 0;
+        dy = 1;
+
+    }
+
+    public void turnD(){
+        dx = 0;
+        dy = -1;
+    }
+
+    public void turnL(){
+        dx = -1;
+        dy = 0;
+    }
+
+    public void turnR() {
+        dx = 1;
+        dy = 0;
+    }
+
+    public void turn(boolean up, boolean dn, boolean lt, boolean rt){
+        if (up && dy == 0){
+            dx = 0;
+            dy = 1;
+        }
+        else if (dn && dy == 0){
+            dx = 0;
+            dy = -1;
+        }
+        else if (lt && dx == 0){
+            dx = -1;
+            dy = 0;
+        }
+        else if (rt && dx == 0){
+            dx = 1;
+            dy = 0;
+        }
     }
 
     public void move(Food f){
@@ -585,6 +570,27 @@ public class Snake {
     public void update(Food f, boolean display){
         move(f);
         if (display) display();
+    }
+
+    public boolean survive(Food f){
+        Snake t = new Snake(this);
+        HashSet<Integer> hs = new HashSet<Integer>();
+        hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
+
+        for (int i=0; i<size-1; i++){
+//            t.autoTurnGreedy(dy == 1, dy == -1, dx == -1,dx == 1, false);
+            t.autoTurnGreedy(t.y.get(size-1)>t.yPos, t.y.get(size-1)<t.yPos, t.x.get(size-1)<t.xPos,t.x.get(size-1)>t.xPos, f,false);
+            t.move(f);
+            hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
+            if (t.dead()) return false;
+            if (hs.contains(t.xPos * GameLauncher.size*2 + t.yPos)) return true;
+        }
+        return true;
+    }
+
+    public boolean dead(){
+        if (coveredNoHead(xPos,yPos) || edged(xPos,yPos)) return true;
+        return false;
     }
 
     public boolean covered(int xx, int yy){

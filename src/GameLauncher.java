@@ -40,11 +40,11 @@ public class GameLauncher {
                 sp = false;
                 at = false;
 
-                for (int ct = 0; ct < 15; ct++) {
+                for (int ct = (auto && bst?14:0); ct < 15; ct++) {
                     sp = sp || StdDraw.isKeyPressed(KeyEvent.VK_SPACE);
                     at = at || StdDraw.isKeyPressed(KeyEvent.VK_A);
 
-                    StdDraw.show(bst ? (auto ? 0 : 3) : ((auto ? 5 : 15)));
+                    StdDraw.show(bst ? (auto ? 0 : 5) : ((auto ? 3 : 15)));
 
                     up = up || StdDraw.isKeyPressed(KeyEvent.VK_UP);
                     dn = dn || StdDraw.isKeyPressed(KeyEvent.VK_DOWN);
