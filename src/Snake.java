@@ -543,9 +543,12 @@ public class Snake {
     public boolean survive(Food f){
         if (this.dead()) return false;
 
+        if (GameLauncher.size % 2 == 1 && size >= GameLauncher.size * GameLauncher.size - 1) return true;
+
         Snake t = new Snake(this);
         HashSet<Integer> hs = new HashSet<Integer>();
         hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
+
 
         for (int i=0; i<size-1; i++){
 //            t.autoTurnGreedy(dy == 1, dy == -1, dx == -1,dx == 1, false);
