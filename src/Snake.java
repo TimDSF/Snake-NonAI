@@ -215,7 +215,7 @@ public class Snake {
                     finished = false;
                     t.greedy = true;
 //                    this.autoTurnGreedy(dy == 1, dy == -1, dx == -1, dx == 1, true);
-                    this.autoTurnGreedy(this.y.get(size-1)<this.yPos, this.y.get(size-1)>this.yPos, this.x.get(size-1)>this.xPos, this.x.get(size-1)<this.xPos, f, true      );
+                    this.autoTurnGreedy(this.y.get(size-1)<this.yPos, this.y.get(size-1)>this.yPos, this.x.get(size-1)>this.xPos, this.x.get(size-1)<this.xPos, f, true);
 
 //                    this.avoidTail();
 //                    System.out.println("Trapped after Food! Avoiding tail: " + (size-3));
@@ -248,10 +248,10 @@ public class Snake {
         sL.move(f);
         sR.move(f);
 
-        boolean mU = !coveredNoTail(xPos,yPos+1) && !edged(xPos, yPos+1) && (!survival || sU.survive(f)),
-                mD = !coveredNoTail(xPos,yPos-1) && !edged(xPos, yPos-1) && (!survival || sD.survive(f)),
-                mL = !coveredNoTail(xPos-1,yPos) && !edged(xPos-1, yPos) && (!survival || sL.survive(f)),
-                mR = !coveredNoTail(xPos+1,yPos) && !edged(xPos+1, yPos) && (!survival || sR.survive(f));
+        boolean mU = !sU.dead() && (!survival || sU.survive(f)),
+                mD = !sD.dead() && (!survival || sD.survive(f)),
+                mL = !sL.dead() && (!survival || sL.survive(f)),
+                mR = !sR.dead() && (!survival || sR.survive(f));
 
 //        if (survival) System.out.println(mU + " " + mD + " " + mL + " " + mR);
 
@@ -573,6 +573,7 @@ public class Snake {
     }
 
     public boolean survive(Food f){
+        if (GameLauncher.size % 2 == 1 && size == GameLauncher.size * GameLauncher.size) return true;
         Snake t = new Snake(this);
         HashSet<Integer> hs = new HashSet<Integer>();
         hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
