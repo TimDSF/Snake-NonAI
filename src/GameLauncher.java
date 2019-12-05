@@ -44,7 +44,7 @@ public class GameLauncher {
                     sp = sp || StdDraw.isKeyPressed(KeyEvent.VK_SPACE);
                     at = at || StdDraw.isKeyPressed(KeyEvent.VK_A);
 
-                    StdDraw.show(bst ? (auto ? 0 : 5) : ((auto ? 3 : 15)));
+                    StdDraw.show((bst || sp) ? (auto ? 0 : 5) : ((auto ? 3 : 15)));
 
                     up = up || StdDraw.isKeyPressed(KeyEvent.VK_UP);
                     dn = dn || StdDraw.isKeyPressed(KeyEvent.VK_DOWN);

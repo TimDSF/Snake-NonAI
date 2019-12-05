@@ -16,6 +16,8 @@ public class Snake {
     public Queue<Integer> dxs = new LinkedList<Integer>();
     public Queue<Integer> dys = new LinkedList<Integer>();
 
+    public boolean tR = false, tL = false;
+
     public Snake() {
         size = 3;
 
@@ -67,9 +69,11 @@ public class Snake {
 
                 v = new Snake(u);
                 v.update(f,false);
-                if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                     v.dxs.add(v.dx);
                     v.dys.add(v.dy);
+                    v.tL = false;
+                    v.tR = false;
                     q.add(v);
                     if (v.xPos == f.xPos && v.yPos == f.yPos){
                         finished = true;
@@ -80,9 +84,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, false, true);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = false;
+                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -93,9 +99,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, true, false);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = true;
+                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -106,9 +114,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, true, false);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = false;
+                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -119,9 +129,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, false, false, true);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = true;
+                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -132,9 +144,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, true, false, false);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = false;
+                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -145,9 +159,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(true, false, false, false);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = true;
+                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -158,9 +174,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(true, false, false, false);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = false;
+                        v.tR = true;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -171,9 +189,11 @@ public class Snake {
                     v = new Snake(u);
                     v.turn(false, true, false, false);
                     v.update(f,false);
-                    if (v.survive(f) && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
+                    if (!v.dead() && hs.add(v.xPos * GameLauncher.size*2 + v.yPos)){
                         v.dxs.add(v.dx);
                         v.dys.add(v.dy);
+                        v.tL = true;
+                        v.tR = false;
                         q.add(v);
                         if (v.xPos == f.xPos && v.yPos == f.yPos){
                             finished = true;
@@ -184,10 +204,22 @@ public class Snake {
             }
             if (!finished){
                 t.greedy = true;
+//                this.avoidTail();
+//                this.autoTurnGreedy(dy == 1, dy == -1, dx == -1, dx == 1, true);
                 this.autoTurnGreedy(this.y.get(size-1)<this.yPos, this.y.get(size-1)>this.yPos, this.x.get(size-1)>this.xPos, this.x.get(size-1)<this.xPos, f,true);
             }else{
-                dxs.addAll(v.dxs);
-                dys.addAll(v.dys);
+                if (v.survive(f)){
+                    dxs.addAll(v.dxs);
+                    dys.addAll(v.dys);
+                }else{
+                    finished = false;
+                    t.greedy = true;
+//                    this.autoTurnGreedy(dy == 1, dy == -1, dx == -1, dx == 1, true);
+                    this.autoTurnGreedy(this.y.get(size-1)<this.yPos, this.y.get(size-1)>this.yPos, this.x.get(size-1)>this.xPos, this.x.get(size-1)<this.xPos, f, true      );
+
+//                    this.avoidTail();
+//                    System.out.println("Trapped after Food! Avoiding tail: " + (size-3));
+                }
             }
         }
         if (finished){
@@ -216,10 +248,10 @@ public class Snake {
         sL.move(f);
         sR.move(f);
 
-        boolean mU = dy!=-1 && (!survival || sU.survive(f)),
-                mD = dy!= 1 && (!survival || sD.survive(f)),
-                mL = dx!= 1 && (!survival || sL.survive(f)),
-                mR = dx!=-1 && (!survival || sR.survive(f));
+        boolean mU = !coveredNoTail(xPos,yPos+1) && !edged(xPos, yPos+1) && (!survival || sU.survive(f)),
+                mD = !coveredNoTail(xPos,yPos-1) && !edged(xPos, yPos-1) && (!survival || sD.survive(f)),
+                mL = !coveredNoTail(xPos-1,yPos) && !edged(xPos-1, yPos) && (!survival || sL.survive(f)),
+                mR = !coveredNoTail(xPos+1,yPos) && !edged(xPos+1, yPos) && (!survival || sR.survive(f));
 
 //        if (survival) System.out.println(mU + " " + mD + " " + mL + " " + mR);
 
@@ -307,7 +339,7 @@ public class Snake {
                 }else if (mL){
                     turnL();
                 }else if (mU) {
-                    turnR();
+                    turnU();
                 }
             }else if (rt){
                 if (up && mU){
@@ -400,7 +432,7 @@ public class Snake {
             autoTurnBFS(f,t);
         }else{
             t.greedy = true;
-            autoTurnGreedy(yPos<f.yPos,yPos>f.yPos,xPos>f.xPos,xPos<f.xPos, f, true);
+            autoTurnGreedy(yPos<f.yPos,yPos>f.yPos,xPos>f.xPos,xPos<f.xPos, f, false);
         }
     }
 
@@ -478,19 +510,19 @@ public class Snake {
             yn=y.get(i+1);
             if (xp + 1 == xx && yy + 1 == yn || xn + 1 == xx && yy + 1 == yp){
                 StdDraw.filledPolygon(  new double[]{xx, xx+0.45, xx+0.45, xx-0.45, xx-0.45, xx     },
-                                        new double[]{yy, yy     , yy+0.45, yy+0.45, yy-0.45, yy-0.45});
+                        new double[]{yy, yy     , yy+0.45, yy+0.45, yy-0.45, yy-0.45});
                 StdDraw.filledCircle(xx,yy,0.45);
             }else if (xp - 1 == xx && yy + 1 == yn || xn - 1 == xx && yy + 1 == yp){
                 StdDraw.filledPolygon(  new double[]{xx, xx-0.45, xx-0.45, xx+0.45, xx+0.45, xx     },
-                                        new double[]{yy, yy     , yy+0.45, yy+0.45, yy-0.45, yy-0.45});
+                        new double[]{yy, yy     , yy+0.45, yy+0.45, yy-0.45, yy-0.45});
                 StdDraw.filledCircle(xx,yy,0.45);
             }else if (xp + 1 == xx && yy - 1 == yn || xn + 1 == xx && yy - 1 == yp){
                 StdDraw.filledPolygon(  new double[]{xx, xx     , xx-0.45, xx-0.45, xx+0.45, xx+0.45},
-                                        new double[]{yy, yy+0.45, yy+0.45, yy-0.45, yy-0.45, yy     });
+                        new double[]{yy, yy+0.45, yy+0.45, yy-0.45, yy-0.45, yy     });
                 StdDraw.filledCircle(xx,yy,0.45);
             }else if (xp - 1 == xx && yy - 1 == yn || xn - 1 == xx && yy - 1 == yp){
                 StdDraw.filledPolygon(  new double[]{xx, xx-0.45, xx-0.45, xx+0.45, xx+0.45, xx     },
-                                        new double[]{yy, yy     , yy-0.45, yy-0.45, yy+0.45, yy+0.45});
+                        new double[]{yy, yy     , yy-0.45, yy-0.45, yy+0.45, yy+0.45});
                 StdDraw.filledCircle(xx,yy,0.45);
             }else{
                 StdDraw.filledSquare(x.get(i),y.get(i),0.45);
@@ -511,28 +543,28 @@ public class Snake {
         // tail
         if (xp + 1 == xx) {
             StdDraw.filledPolygon(   new double[]{xx-0.45, xx-0.45, xx+0.40, xx+0.40},
-                                     new double[]{yy-0.40, yy+0.40, yy+0.25, yy-0.25});
+                    new double[]{yy-0.40, yy+0.40, yy+0.25, yy-0.25});
         }else if (xp - 1 == xx) {
             StdDraw.filledPolygon(   new double[]{xx+0.45, xx+0.45, xx-0.40, xx-0.40},
-                                     new double[]{yy-0.40, yy+0.40, yy+0.25, yy-0.25});
+                    new double[]{yy-0.40, yy+0.40, yy+0.25, yy-0.25});
         }else if (yp + 1 == yy){
             StdDraw.filledPolygon(   new double[]{xx-0.40, xx+0.40, xx+0.25, xx-0.25},
-                                     new double[]{yy-0.45, yy-0.45, yy+0.40, yy+0.40});
+                    new double[]{yy-0.45, yy-0.45, yy+0.40, yy+0.40});
         }else if (yp - 1 == yy){
             StdDraw.filledPolygon(   new double[]{xx-0.40, xx+0.40, xx+0.25, xx-0.25},
-                                     new double[]{yy+0.45, yy+0.45, yy-0.40, yy-0.40});
+                    new double[]{yy+0.45, yy+0.45, yy-0.40, yy-0.40});
         }
 
         // head
         StdDraw.setPenColor(new Color(100,0,255));
-             if (dx == 1) StdDraw.filledPolygon(    new double[]{xPos-0.45, xPos-0.45, xPos+0.45, xPos+0.45},
-                                                    new double[]{yPos-0.45, yPos+0.45, yPos+0.30, yPos-0.30});
+        if (dx == 1) StdDraw.filledPolygon(    new double[]{xPos-0.45, xPos-0.45, xPos+0.45, xPos+0.45},
+                new double[]{yPos-0.45, yPos+0.45, yPos+0.30, yPos-0.30});
         else if (dx == -1) StdDraw.filledPolygon(   new double[]{xPos+0.45, xPos+0.45, xPos-0.45, xPos-0.45},
-                                                    new double[]{yPos-0.45, yPos+0.45, yPos+0.30, yPos-0.30});
+                new double[]{yPos-0.45, yPos+0.45, yPos+0.30, yPos-0.30});
         else if (dy == 1) StdDraw.filledPolygon(    new double[]{xPos-0.45, xPos+0.45, xPos+0.30, xPos-0.30},
-                                                    new double[]{yPos-0.45, yPos-0.45, yPos+0.45, yPos+0.45});
+                new double[]{yPos-0.45, yPos-0.45, yPos+0.45, yPos+0.45});
         else if (dy == -1) StdDraw.filledPolygon(   new double[]{xPos-0.45, xPos+0.45, xPos+0.30, xPos-0.30},
-                                                    new double[]{yPos+0.45, yPos+0.45, yPos-0.45, yPos-0.45});
+                new double[]{yPos+0.45, yPos+0.45, yPos-0.45, yPos-0.45});
     }
 
     public void update(Food f, boolean display){
@@ -541,18 +573,12 @@ public class Snake {
     }
 
     public boolean survive(Food f){
-        if (this.dead()) return false;
-
-        if (GameLauncher.size % 2 == 1 && size >= GameLauncher.size * GameLauncher.size - 1) return true;
-
         Snake t = new Snake(this);
         HashSet<Integer> hs = new HashSet<Integer>();
         hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
 
-
         for (int i=0; i<size-1; i++){
 //            t.autoTurnGreedy(dy == 1, dy == -1, dx == -1,dx == 1, false);
-//            t.autoTurnGreedy(t.y.get(size-1)<t.yPos, t.y.get(size-1)>t.yPos, t.x.get(size-1)>t.xPos,t.x.get(size-1)<t.xPos, f,false);
             t.autoTurnGreedy(t.y.get(size-1)>t.yPos, t.y.get(size-1)<t.yPos, t.x.get(size-1)<t.xPos,t.x.get(size-1)>t.xPos, f,false);
             t.move(f);
             hs.add(t.x.get(t.size-1)*GameLauncher.size*2 + t.y.get(t.size-1));
